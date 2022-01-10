@@ -1,0 +1,61 @@
+@startuml
+
+title Scooter Hire Class Diagram
+
+ left to right direction
+ 
+ 
+ class DVLA {
+ +boolean verifyAccount()
+ }
+ 
+ class Account {
+ +string email
++string contactNumber
++string bankDetails
++string paymentMethod
+ +boolean isVerified()
+ }
+ 
+ class User{
++string name
++string location
++boolean hasHiredScooter()
+}
+
+class ChargePoint {
++string location
++number scootersAvailable()
++boolean isScooterCharging()
+
+}
+class Scooter {
++string model
++number speedLimit
++number chargePercentage
++boolean isCharged()
++boolean isHired()
++boolean isWithtin32()
++boolean isOverLimit()
+}
+class HireCompany {
++string contactNumber
++string email
+}
+
+class MaintenanceTeam {
+string name
+string employeeNumber
+}
+
+DVLA "1" -- "1" Account : verifies
+Account "1" *-- "1" User : verifies
+HireCompany "1" o-- "*" ChargePoint : has
+ChargePoint "1" o-- "6" Scooter : has
+HireCompany "1" o-- "*" Scooter : has
+HireCompany "1" o-- "1" MaintenanceTeam : has
+HireCompany "1" <-- "1" User : is used by
+Scooter "*" -- "1" MaintenanceTeam : is maintained by
+ChargePoint "1" <-- "1"  User : is used by
+Scooter "1" <-- "1" User : is used by
+@enduml

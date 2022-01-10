@@ -1,0 +1,25 @@
+@startuml
+
+title Scooter Hire Sequence Diagram
+
+Actor User
+
+User -> App_UI : register for account
+App_UI -> App_API : log details
+App_API -> Database : log details into Database
+Database -> App_API : prompt verification
+App_API -> User : request verification code
+User -> App_UI : verify account
+App_UI -> App_API : check verification
+App_API -> App_UI : confirm verification or return error
+App_UI -> User : confirm verification or return error
+User -> App_UI : find nearest scooter
+App_UI -> App_API : obtain nearest scooter based on User location
+App_API -> Database : obtain list of nearest scooters from Database
+Database -> User : return list of nearest scooters and charging stations
+User -> App_UI : select scooter from list
+App_UI -> App_API : confirm selection
+App_API -> User : provide QR code for collection
+
+
+@enduml
